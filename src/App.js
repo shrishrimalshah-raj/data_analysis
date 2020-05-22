@@ -30,8 +30,6 @@ const App = () => {
           <Route path="/CLIENT">
             <CLIENTIndexBarChart />
           </Route>
-
-
         </Switch>
       </BrowserRouter>
     </>
