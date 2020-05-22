@@ -1,0 +1,1 @@
+export { default as CLIENTIndexBarChart } from './CLIENTIndexBarChart';

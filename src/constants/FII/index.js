@@ -1,0 +1,1 @@
+export { default as FII_Index_Data } from './FII_Index_Data';
