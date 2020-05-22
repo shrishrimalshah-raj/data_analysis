@@ -15,7 +15,6 @@ import { CLIENTIndexBarChart } from './modules/CLIENT';
 
 import SelectComponent from './components/SelectComponent';
 
-
 const App = () => {
   return (
     <>
