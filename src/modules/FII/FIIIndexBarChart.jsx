@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 import React, { useState } from 'react'
 import Papa from 'papaparse';
 
@@ -28,22 +29,21 @@ const FIIIndexBarChart = () => {
   const updateData = (result) => {
     var data = result.data;
     setJsonData(data);
-    let response = splitArray(data, 'FII');
-    const { fno_index_data,
-      fno_future_data,
-      fno_call_data,
-      fno_put_data } = response;
+    let response = splitArray(data, 'FII', 'FII_DATA');
+    const { reduce_fno_index_data,
+      reduce_fno_future_data,
+      reduce_fno_call_data,
+      reduce_fno_put_data } = response;
 
 
-    setFnoData(fno_index_data);
-    setFutureData(fno_future_data);
-    setCallData(fno_call_data);
-    setPutData(fno_put_data);
+    setFnoData(reduce_fno_index_data);
+    setFutureData(reduce_fno_future_data);
+    setCallData(reduce_fno_call_data);
+    setPutData(reduce_fno_put_data);
   }
-
+  
   return (
     <>
-
       <div className="App">
         <h2>Import CSV File!</h2>
         <input
@@ -69,7 +69,7 @@ const FIIIndexBarChart = () => {
         <BarChartGeneric data={callData} client_code="FII" segment="FNO_CALL_DATA" chip_input="FII" />
       }
       {putData.length > 1 &&
-        <BarChartGeneric data={futureData} client_code="FII" segment="FNO_PUT_DATA" chip_input="FII" />
+        <BarChartGeneric data={putData} client_code="FII" segment="FNO_PUT_DATA" chip_input="FII" />
       }
     </>
   )

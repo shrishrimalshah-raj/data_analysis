@@ -1,12 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import {
   Switch,
   Route,
-  Link,
   BrowserRouter,
-  useHistory,
-  Redirect
 } from 'react-router-dom';
 
 import { FIIIndexBarChart } from './modules/FII';
@@ -21,15 +17,11 @@ const App = () => {
       <BrowserRouter>
         <SelectComponent />
         <Switch>
-          <Route path="/FII">
-            <FIIIndexBarChart />
-          </Route>
-          <Route path="/PRO">
-            <PROIndexBarChart />
-          </Route>
-          <Route path="/CLIENT">
-            <CLIENTIndexBarChart />
-          </Route>
+
+          <Route exact path="/FII" component={FIIIndexBarChart} />
+          <Route exact path="/PRO" component={PROIndexBarChart} />
+          <Route exact path="/CLIENT" component={CLIENTIndexBarChart} />
+          
         </Switch>
       </BrowserRouter>
     </>
