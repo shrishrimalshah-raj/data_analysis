@@ -3,6 +3,7 @@ import {
   Switch,
   Route,
   BrowserRouter,
+  Redirect,
 } from 'react-router-dom';
 
 import { FIIIndexBarChart } from './modules/FII';
@@ -21,7 +22,9 @@ const App = () => {
           <Route exact path="/FII" component={FIIIndexBarChart} />
           <Route exact path="/PRO" component={PROIndexBarChart} />
           <Route exact path="/CLIENT" component={CLIENTIndexBarChart} />
-          
+         
+          <Redirect to="/" />
+
         </Switch>
       </BrowserRouter>
     </>

@@ -1,12 +1,12 @@
 
 const data = [
   {
-    date: '10 MAY 2020',
-    uv: 52,
+    date: '8 MAY 2020',
+    uv: 177,
   },
   {
     date: '11 MAY 2020',
-    uv: -12,
+    uv: -137,
   },
   {
     date: '12 MAY 2020',
@@ -47,7 +47,7 @@ const data = [
 ];
 
 const returnLatestTenValuesOfArray = (array) => {
-    return array.slice(array.length - 10 ,array.length)
+    return array.slice(array.length - 10, array.length)
 }
 
 const niftyValueForPastTenDays = returnLatestTenValuesOfArray(data);

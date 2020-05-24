@@ -1,11 +1,27 @@
-/* eslint-disable */ 
+/* eslint-disable */
 import React, { useState } from 'react'
 import Papa from 'papaparse';
+import { makeStyles } from '@material-ui/core/styles';
+import { Button } from '@material-ui/core';
 
 import { BarChartGeneric } from '../../components/BarChart'
 
 import { splitArray } from '../../lib';
-import { AreaChartGeneric } from '../../components/AreaChart';
+import IndexData from '../../components/IndexData';
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    '& > *': {
+      margin: theme.spacing(0.5),
+    },
+    marginTop: '50px  '
+  },
+}));
+
 
 const PROIndexBarChart = () => {
 
@@ -15,13 +31,17 @@ const PROIndexBarChart = () => {
   const [futureData, setFutureData] = useState([]);
   const [callData, setCallData] = useState([]);
   const [putData, setPutData] = useState([]);
+  const [toggleValue, setToggleValue] = useState(true);
+
+  const classes = useStyles();
+
 
   const handleCSVFile = event => {
     setCsvFile(event.target.files[0]);
   };
 
   const importCSV = () => {
-
+    setToggleValue(false);
     Papa.parse(csvfile, {
       complete: updateData,
     });
@@ -44,34 +64,47 @@ const PROIndexBarChart = () => {
 
   return (
     <>
+      <div className={classes.root}>
 
-      <div className="App">
-        <h2>Import CSV File!</h2>
-        <input
-          className="csv-input"
-          type="file"
-          name="file"
-          placeholder={null}
-          onChange={handleCSVFile}
-        />
-        <p />
-        {csvfile && <button onClick={importCSV}> Upload now!</button>}
+        <div>
+          {toggleValue && 
+          <>
+            <h2>Import CSV File!</h2>
+            <input
+              className="csv-input"
+              type="file"
+              name="file"
+              placeholder={null}
+              onChange={handleCSVFile}
+            />
+            <br />
+            <br />
+            <br />
+            {csvfile && <Button variant="contained" color="primary" onClick={importCSV}> Upload now!</Button>}
+          </>}
+        </div>
+
+        <div style={{ marginTop: '30px' }}>
+          {fnoData.length > 1 && <IndexData />}
+        </div>
+
+        <div style={{ marginTop: '100px' }}>
+          {fnoData.length > 1 &&
+            <BarChartGeneric data={fnoData} client_code="FII" segment="FNO_INDEX" chip_input="PRO" />
+          }
+          {futureData.length > 1 &&
+            <BarChartGeneric data={futureData} client_code="FII" segment="FNO_FUTURE" chip_input="PRO" />
+          }
+          {callData.length > 1 &&
+            <BarChartGeneric data={callData} client_code="FII" segment="FNO_CALL_DATA" chip_input="PRO" />
+          }
+          {putData.length > 1 &&
+            <BarChartGeneric data={putData} client_code="FII" segment="FNO_PUT_DATA" chip_input="PRO" />
+          }
+        </div>
+
       </div>
 
-      <AreaChartGeneric />
-
-      {fnoData.length > 1 &&
-        <BarChartGeneric data={fnoData} client_code="FII" segment="FNO_INDEX" chip_input="PRO" />
-      }
-      {futureData.length > 1 &&
-        <BarChartGeneric data={futureData} client_code="FII" segment="FNO_FUTURE" chip_input="PRO" />
-      }
-      {callData.length > 1 &&
-        <BarChartGeneric data={callData} client_code="FII" segment="FNO_CALL_DATA" chip_input="PRO" />
-      }
-      {putData.length > 1 &&
-        <BarChartGeneric data={putData} client_code="FII" segment="FNO_PUT_DATA" chip_input="PRO" />
-      }
     </>
   )
 }
