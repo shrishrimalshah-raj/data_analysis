@@ -8,6 +8,7 @@ import { BarChartGeneric } from '../../components/BarChart'
 
 import { splitArray } from '../../lib';
 import IndexData from '../../components/IndexData';
+import { BasicDataSheet } from '../../components/BasicDatasheet';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -83,9 +84,13 @@ const PROIndexBarChart = () => {
             {csvfile && <Button variant="contained" color="primary" onClick={importCSV}> Upload now!</Button>}
           </>}
         </div>
-
+        
         <div style={{ marginTop: '30px' }}>
           {fnoData.length > 1 && <IndexData />}
+        </div>
+
+        <div style={{ marginTop: '50px' }}>
+          {fnoData.length > 1 && <BasicDataSheet data={jsonData} />}
         </div>
 
         <div style={{ marginTop: '100px' }}>

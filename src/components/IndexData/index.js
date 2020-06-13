@@ -37,7 +37,7 @@ const index = () => {
 
       {data.length > 1 && (
         <>
-          <ChipComponent name='Last 10 days data' />
+          <ChipComponent name='Last 14 days data' />
           <br />
           <BarChart
             width={1200}

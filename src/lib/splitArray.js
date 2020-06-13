@@ -27,7 +27,7 @@ const reduceArrayValues = (arr, clientDataCode) => {
 }
 
 const returnLatestTenValuesOfArray = (array) => {
-  return array.slice(array.length - 10, array.length)
+  return array.slice(array.length - 14, array.length)
 }
 
 const splitArray = (arr, clientCode, clientDataCode) => {
@@ -65,10 +65,10 @@ const splitArray = (arr, clientCode, clientDataCode) => {
 
 
   return ({
-    reduce_fno_index_data,
-    reduce_fno_future_data,
-    reduce_fno_call_data,
-    reduce_fno_put_data,
+    reduce_fno_index_data:  returnLatestTenValuesOfArray(reduce_fno_index_data),
+    reduce_fno_future_data: returnLatestTenValuesOfArray(reduce_fno_future_data),
+    reduce_fno_call_data:   returnLatestTenValuesOfArray(reduce_fno_call_data),
+    reduce_fno_put_data:    returnLatestTenValuesOfArray(reduce_fno_put_data),
   })
 }
 

@@ -44,10 +44,66 @@ const data = [
     date: '22 MAY 2020',
     uv: -45,
   },
+  {
+    date: '26 MAY 2020',
+    uv: 55,
+  }, 
+  {
+    date: '27 MAY 2020',
+    uv: 174,
+  },
+  {
+    date: '28 MAY 2020',
+    uv: 193,
+  },
+  {
+    date: '29 MAY 2020',
+    uv: 193,
+  },
+  {
+    date: '1 JUN 2020',
+    uv: 320,
+  },
+  {
+    date: '2 JUN 2020',
+    uv: 56,
+  },
+  {
+    date: '3 JUN 2020',
+    uv: 111,
+  },
+  {
+    date: '4 JUN 2020',
+    uv: -65,
+  },
+  {
+    date: '5 JUN 2020',
+    uv: 139,
+  },
+  {
+    date: '8 JUN 2020',
+    uv: -1,
+  },
+  {
+    date: '9 JUN 2020',
+    uv: -151,
+  },
+  {
+    date: '10 JUN 2020',
+    uv: 12,
+  },
+  {
+    date: '11 JUN 2020',
+    uv: -258,
+  },
+  {
+    date: '12 JUN 2020',
+    uv: 46,
+  },
 ];
 
 const returnLatestTenValuesOfArray = (array) => {
-    return array.slice(array.length - 10, array.length)
+    return array.slice(array.length - 14, array.length)
 }
 
 const niftyValueForPastTenDays = returnLatestTenValuesOfArray(data);

@@ -9,6 +9,7 @@ import { BarChartGeneric } from '../../components/BarChart'
 import { splitArray } from '../../lib';
 import { AreaChartGeneric } from '../../components/AreaChart';
 import IndexData from '../../components/IndexData';
+import { BasicDataSheet } from '../../components/BasicDatasheet';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,7 +61,6 @@ const FIIIndexBarChart = () => {
     setCallData(reduce_fno_call_data);
     setPutData(reduce_fno_put_data);
   }
-
   return (
     <>
       <div className={classes.root}>
@@ -81,10 +81,14 @@ const FIIIndexBarChart = () => {
             <br />    
           {csvfile && <Button variant="contained" color="primary" onClick={importCSV}> Upload now!</Button>}
           </> }
-        </div>
+        </div>  
 
         <div style={{ marginTop: '30px' }}>
         {fnoData.length > 1 && <IndexData />}
+        </div>
+              
+        <div style={{ marginTop: '50px' }}>
+          {fnoData.length > 1 && <BasicDataSheet data={jsonData} />}
         </div>
 
         <div style={{ marginTop: '100px' }}>
