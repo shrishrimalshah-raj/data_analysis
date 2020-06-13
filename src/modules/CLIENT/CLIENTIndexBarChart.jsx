@@ -48,14 +48,15 @@ const CLIENTIndexBarChart = () => {
   };
   const updateData = (result) => {
     var data = result.data; 
-    setJsonData(data);
     let response = splitArray(data, 'FII', 'CLIENT_DATA');
     const { reduce_fno_index_data,
       reduce_fno_future_data,
       reduce_fno_call_data,
-      reduce_fno_put_data } = response;
+      reduce_fno_put_data, allDates } = response;
 
-
+      data.splice(1, 0, allDates);
+    
+    setJsonData(data);
     setFnoData(reduce_fno_index_data);
     setFutureData(reduce_fno_future_data);
     setCallData(reduce_fno_call_data);

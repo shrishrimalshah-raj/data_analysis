@@ -4,6 +4,7 @@ let fno_future_data = { FII_DATA: [], PRO_DATA: [], CLIENT_DATA: [] };
 let fno_call_data = { FII_DATA: [], PRO_DATA: [], CLIENT_DATA: [] };
 let fno_put_data = { FII_DATA: [], PRO_DATA: [], CLIENT_DATA: [] };
 let newArr;
+let allDates = [];
 
 // FINDING DIFFERENCE IN OI currentDay - prevDay and return it
 const reduceArrayValues = (arr, clientDataCode) => {
@@ -44,6 +45,8 @@ const splitArray = (arr, clientCode, clientDataCode) => {
   newArr.forEach((element, idx) => {
 
     const currentDate = element.splice(0, 1);
+    //PUSH ALL DATES TO NEW ARRAY USED IN BASIC DATA SHEET
+    allDates.push(currentDate[0])
 
     // PROCESS EACH ROW OF .CSV FILE
     splitDataInSpecificArray(currentDate, element, clientCode, clientDataCode);
@@ -69,6 +72,7 @@ const splitArray = (arr, clientCode, clientDataCode) => {
     reduce_fno_future_data: returnLatestTenValuesOfArray(reduce_fno_future_data),
     reduce_fno_call_data:   returnLatestTenValuesOfArray(reduce_fno_call_data),
     reduce_fno_put_data:    returnLatestTenValuesOfArray(reduce_fno_put_data),
+    allDates,
   })
 }
 
