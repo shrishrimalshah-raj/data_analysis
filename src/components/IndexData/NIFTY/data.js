@@ -100,6 +100,26 @@ const data = [
     date: '12 JUN 2020',
     uv: 70,
   },
+  {
+    date: '15 JUN 2020',
+    uv: -159,
+  },
+  {
+    date: '16 JUN 2020',
+    uv: 100,
+  },
+  {
+    date: '17 JUN 2020',
+    uv: -32,
+  },
+  {
+    date: '18 JUN 2020',
+    uv: 210,
+  },
+  {
+    date: '19 JUN 2020',
+    uv: 152,
+  },
 ];
 
 const returnLatestTenValuesOfArray = (array) => {

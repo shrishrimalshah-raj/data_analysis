@@ -48,6 +48,7 @@ const FIIIndexBarChart = () => {
   };
   const updateData = (result) => {
     var data = result.data;
+    console.log('data', data);
     let response = splitArray(data, 'FII', 'FII_DATA');
     const { reduce_fno_index_data,
       reduce_fno_future_data,
@@ -63,6 +64,16 @@ const FIIIndexBarChart = () => {
     setCallData(reduce_fno_call_data);
     setPutData(reduce_fno_put_data);
   }
+
+ if(fnoData) {
+  console.log('fnoData', fnoData);
+  console.log('futureData', futureData);
+  console.log('callData', callData);
+  console.log('putData', putData);
+
+ }
+
+
   return (
     <>
       <div className={classes.root}>

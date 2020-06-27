@@ -11,7 +11,7 @@ export default class BasicSheet extends React.Component {
   }
 
   returnLatestValuesOfArray = (array) => {
-    return array.slice(array.length - 10, array.length)
+    return array.slice(array.length - 14, array.length)
   }
 
   pushDataToState = (data) => {
@@ -72,7 +72,7 @@ export default class BasicSheet extends React.Component {
     return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
        <div>
-        <ChipComponent name='Last 10 days data' />
+        <ChipComponent name='Last 14 days data' />
        </div>
       <div style={{ marginTop: '20px'}}>
         <Datasheet
