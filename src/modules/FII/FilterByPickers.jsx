@@ -10,11 +10,13 @@ import { Button, TextField } from '@material-ui/core';
 import moment from 'moment'
 
 import config from '../../config';
+import FormDialog from './FormDialog';
 
-
-export default function FilterByPickers({ setNiftyURL, setFiiURL, filterBy, lastRecord, setLastRecord}) {
+export default function FilterByPickers({ setNiftyURL, setFiiURL, filterBy, lastRecord, setLastRecord }) {
   const [startDate, setStartDate] = useState(moment(new Date()).subtract(7, 'days'));
   const [endDate, setEndDate] = useState(new Date());
+  const [open, setOpen] = useState(true);
+
   const { serviceURL } = config;
 
 
@@ -79,6 +81,7 @@ export default function FilterByPickers({ setNiftyURL, setFiiURL, filterBy, last
             <br />
             <Grid container justify="center">
               <TextField
+                autoFocus
                 error={!Boolean(lastRecord)}
                 id="standard-error-helper-text"
                 label="Enter number"
@@ -91,26 +94,33 @@ export default function FilterByPickers({ setNiftyURL, setFiiURL, filterBy, last
             <br />
             <br />
             <Grid container justify="center">
-              <Button 
-                variant="contained" 
-                color="primary" 
+              <Button
+                variant="contained"
+                color="primary"
                 onClick={handleClickLastRecords}
                 disabled={!Boolean(lastRecord)}
-                >
-                  Submit
+              >
+                Submit
               </Button>
             </Grid>
           </>
         );
+      case 'insertNewRecord':
+        return (
+          <>
+            <FormDialog open={open} setOpen={setOpen} />
+          </>
+        );
+
       default:
         return (<></>);
     }
   }
 
-  
+
   return (
     <>
-    {renderSwitch(filterBy)}
+      {renderSwitch(filterBy)}
     </>
   );
 }

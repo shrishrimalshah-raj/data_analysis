@@ -45,6 +45,7 @@ const SelectComponent = ({ filterBy, handleChange}) => {
             <MenuItem value=''>Select</MenuItem>
             <MenuItem value='date'>Filter by Date</MenuItem>
             <MenuItem value='lastRecords'>Filter by Last Records</MenuItem>
+            <MenuItem value='insertNewRecord'>Insert New Record</MenuItem>
           </Select>
         </FormControl>
       </div>

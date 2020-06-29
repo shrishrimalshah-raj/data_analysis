@@ -48,18 +48,8 @@ const FIIIndexBar = () => {
 
   const handleChange = (event) => {
     const { target: { value } } = event;
-
-    if (value === 'date') {
-      setFilterBy(value)
-    }
-
-    if (value === 'lastRecords') {
-      setFilterBy(value)
-    }
-
-    if (value === '') {
-      setFilterBy(value)
-    }
+    
+    setFilterBy(value)
   };
 
 
