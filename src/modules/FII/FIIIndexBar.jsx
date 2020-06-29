@@ -2,16 +2,19 @@ import React from 'react'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 
-import MaterialUIPickers from './MaterialUIPickers'
+import FilterByPickers from './FilterByPickers'
 import NiftyChart from './NiftyChart'
 import MixedChartOI from './MixedChartOI';
 import DailyChartOI from './DailyChartOI';
+import SelectComponent from './SelectComponent';
+
 import config from '../../config';
 
 const FIIIndexBar = () => {
   const { serviceURL } = config;
 
   const [lastRecord, setLastRecord] = useState(10);
+  const [filterBy, setFilterBy] = useState('');
   const [fiiURL, setFiiURL] = useState(`${serviceURL}/fii/index/${lastRecord}`)
   const [niftyURL, setNiftyURL] = useState(`${serviceURL}/nifty/index/${lastRecord}`)
 
@@ -29,7 +32,7 @@ const FIIIndexBar = () => {
           axios.spread((...responses) => {
             const responseOne = responses[0];
             const responseTwo = responses[1];
-            
+
 
             setFiiData(responseOne.data.data)
             setNiftyData(responseTwo.data.data)
@@ -43,12 +46,38 @@ const FIIIndexBar = () => {
     fetchData();
   }, [fiiURL, niftyURL]);
 
+  const handleChange = (event) => {
+    const { target: { value } } = event;
+
+    if (value === 'date') {
+      setFilterBy(value)
+    }
+
+    if (value === 'lastRecords') {
+      setFilterBy(value)
+    }
+
+    if (value === '') {
+      setFilterBy(value)
+    }
+  };
+
+
   return (
     <>
 
-      <MaterialUIPickers setFiiURL={setFiiURL} setNiftyURL={setNiftyURL}/>
-
-      <DailyChartOI data={fiiData} title="FII INDEX DATA OI CHANGE 2020"/>
+      <SelectComponent filterBy={filterBy} handleChange={handleChange} />
+      
+      {filterBy !== '' && (
+        <FilterByPickers 
+          setFiiURL={setFiiURL} 
+          setNiftyURL={setNiftyURL}  
+          filterBy={filterBy}
+          lastRecord={lastRecord}
+          setLastRecord={setLastRecord}
+      />)}
+      
+      <DailyChartOI data={fiiData} title="FII INDEX DATA OI CHANGE 2020" />
 
       <NiftyChart data={niftyData} />
 

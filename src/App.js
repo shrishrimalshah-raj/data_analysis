@@ -6,24 +6,24 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import { FIIIndexBarChart, FIIIndexBar } from './modules/FII';
+import { FIIIndexBar } from './modules/FII';
 import { PROIndexBarChart } from './modules/PRO';
 import { CLIENTIndexBarChart } from './modules/CLIENT';
 
-import SelectComponent from './components/SelectComponent';
+import NavBar from './components/NavBar';
+
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
-        <SelectComponent />
+        <NavBar />
         <Switch>
 
-          {/* <Route exact path="/FII" component={FIIIndexBarChart} /> */}
           <Route exact path="/FII" component={FIIIndexBar} />
           <Route exact path="/PRO" component={PROIndexBarChart} />
           <Route exact path="/CLIENT" component={CLIENTIndexBarChart} />
-         
+
           <Redirect to="/" />
 
         </Switch>
