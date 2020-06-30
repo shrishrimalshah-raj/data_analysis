@@ -3,6 +3,11 @@ import Chart from 'react-google-charts'
 import moment from 'moment'
 
 
+const formatDate = (date, dailyLongPercentage, dailyShortPercentage) => {
+  const dateFormat = moment(date).subtract(1, 'days').format('MMM Do YYYY');
+  return `${dateFormat}, DailyLongPercentage: ${dailyLongPercentage}, DailyShortPercentage: ${dailyShortPercentage}`
+}
+
 const changeMixedChartData = (data) => {
 
   if(data.length === 0 ) {
@@ -15,7 +20,7 @@ const changeMixedChartData = (data) => {
 
   data.forEach((res) => {
     let temp = [
-      moment(res[filterColumn[0]]).subtract(1, 'days').format('MMM Do YYYY'), 
+      formatDate(res[filterColumn[0]], res["dailyLongPercentage"], res["dailyShortPercentage"]), 
       res[filterColumn[1]], 
       res[filterColumn[2]]
     ];

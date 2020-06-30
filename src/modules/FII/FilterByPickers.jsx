@@ -15,7 +15,6 @@ import FormDialog from './FormDialog';
 export default function FilterByPickers({ setNiftyURL, setFiiURL, filterBy, lastRecord, setLastRecord }) {
   const [startDate, setStartDate] = useState(moment(new Date()).subtract(7, 'days'));
   const [endDate, setEndDate] = useState(new Date());
-  const [open, setOpen] = useState(true);
 
   const { serviceURL } = config;
 
@@ -108,7 +107,7 @@ export default function FilterByPickers({ setNiftyURL, setFiiURL, filterBy, last
       case 'insertNewRecord':
         return (
           <>
-            <FormDialog open={open} setOpen={setOpen} />
+            <FormDialog />
           </>
         );
 
