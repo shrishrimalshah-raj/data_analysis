@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
 
 const SelectComponent = ({ filterBy, handleChange}) => {
 
-  const [clientCode, setClientCode] = useState('');
   const classes = useStyles();
 
   return (

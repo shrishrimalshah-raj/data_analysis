@@ -1,1 +1,1 @@
-export { default as FIIIndexBar } from './FIIIndexBar';
+export { default as FIITabs } from './FIITabs';

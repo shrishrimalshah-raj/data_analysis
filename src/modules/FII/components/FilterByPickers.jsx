@@ -9,10 +9,20 @@ import {
 import { Button, TextField } from '@material-ui/core';
 import moment from 'moment'
 
-import config from '../../config';
-import FormDialog from './FormDialog';
+import config from '../../../config';
+import { FormDialog } from '.';
 
-export default function FilterByPickers({ setNiftyURL, setFiiURL, filterBy, lastRecord, setLastRecord }) {
+export default function FilterByPickers(props) {
+  const {
+    setNiftyURL,
+    setFiiURL,
+    filterBy,
+    lastRecord,
+    setLastRecord,
+    url,
+    clientCode,
+  } = props;
+
   const [startDate, setStartDate] = useState(moment(new Date()).subtract(7, 'days'));
   const [endDate, setEndDate] = useState(new Date());
 
@@ -28,12 +38,12 @@ export default function FilterByPickers({ setNiftyURL, setFiiURL, filterBy, last
   };
 
   const handleClickDate = async () => {
-    setFiiURL(`${serviceURL}/fii/index/?startDate=${startDate}&endDate=${endDate}`);
+    setFiiURL(`${serviceURL}/${url}/?startDate=${startDate}&endDate=${endDate}`);
     setNiftyURL(`${serviceURL}/nifty/index/?startDate=${startDate}&endDate=${endDate}`);
   }
 
   const handleClickLastRecords = async () => {
-    setFiiURL(`${serviceURL}/fii/index/${lastRecord}`);
+    setFiiURL(`${serviceURL}/${url}/${lastRecord}`);
     setNiftyURL(`${serviceURL}/nifty/index/${lastRecord}`);
   }
 
@@ -107,7 +117,7 @@ export default function FilterByPickers({ setNiftyURL, setFiiURL, filterBy, last
       case 'insertNewRecord':
         return (
           <>
-            <FormDialog />
+              <FormDialog url={url} clientCode={clientCode} />
           </>
         );
 

@@ -2,20 +2,22 @@ import React from 'react'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 
-import FilterByPickers from './FilterByPickers'
-import NiftyChart from './NiftyChart'
-import MixedChartOI from './MixedChartOI';
-import DailyChartOI from './DailyChartOI';
-import SelectComponent from './SelectComponent';
+import {
+  DailyChartOI,
+  NiftyChart,
+  MixedChartOI,
+  SelectComponent,
+  FilterByPickers
+} from '../components';
 
-import config from '../../config';
+import config from '../../../config';
 
-const FIIIndexBar = () => {
+const FIICallBar = () => {
   const { serviceURL } = config;
 
   const [lastRecord, setLastRecord] = useState(10);
   const [filterBy, setFilterBy] = useState('');
-  const [fiiURL, setFiiURL] = useState(`${serviceURL}/fii/index/${lastRecord}`)
+  const [fiiURL, setFiiURL] = useState(`${serviceURL}/fii/call/${lastRecord}`)
   const [niftyURL, setNiftyURL] = useState(`${serviceURL}/nifty/index/${lastRecord}`)
 
   const [fiiData, setFiiData] = useState([])
@@ -48,7 +50,7 @@ const FIIIndexBar = () => {
 
   const handleChange = (event) => {
     const { target: { value } } = event;
-    
+
     setFilterBy(value)
   };
 
@@ -57,17 +59,19 @@ const FIIIndexBar = () => {
     <>
 
       <SelectComponent filterBy={filterBy} handleChange={handleChange} />
-      
+
       {filterBy !== '' && (
-        <FilterByPickers 
-          setFiiURL={setFiiURL} 
-          setNiftyURL={setNiftyURL}  
+        <FilterByPickers
+          setFiiURL={setFiiURL}
+          setNiftyURL={setNiftyURL}
           filterBy={filterBy}
           lastRecord={lastRecord}
           setLastRecord={setLastRecord}
-      />)}
-      
-      <DailyChartOI data={fiiData} title="FII INDEX DATA OI CHANGE 2020" />
+          url="fii/call"
+          clientCode="FII CALL DATA OI"
+        />)}
+
+      <DailyChartOI data={fiiData} title="FII CALL DATA OI CHANGE 2020" />
 
       <NiftyChart data={niftyData} />
 
@@ -77,4 +81,4 @@ const FIIIndexBar = () => {
   )
 }
 
-export default FIIIndexBar
+export default FIICallBar

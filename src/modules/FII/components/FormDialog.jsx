@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, CircularProgress, ClickAwayListener } from '@material-ui/core/';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -10,9 +10,9 @@ import DateFnsUtils from '@date-io/date-fns';
 import axios from 'axios'
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
-import config from '../../config';
+import config from '../../../config';
 
-export default function FormDialog(props) {
+export default function FormDialogCallPut({ url, clientCode }) {
   const { serviceURL } = config;
   const [open, setOpen] = useState(true);
   const [data, setData] = useState({
@@ -22,15 +22,11 @@ export default function FormDialog(props) {
     },
     longPosition: {
       error: false,
-      value: 0,
+      value: '',
     },
     shortPosition: {
       error: false,
-      value: 0,
-    },
-    netBuy: {
-      error: false,
-      value: 0,
+      value: '',
     },
   });
 
@@ -40,7 +36,7 @@ export default function FormDialog(props) {
     setOpen(!open);
   };
 
-  const { date, longPosition, shortPosition, netBuy = false } = data;
+  const { date, longPosition, shortPosition } = data;
 
   const handleChange = (e, oldObject) => {
     const { target: { name, value } } = e;
@@ -63,14 +59,13 @@ export default function FormDialog(props) {
   };
 
   const handleSubmit = async () => {
-    console.log('executed');
     const temp = {};
     for (const property in data) {
       temp[property] = `${data[property].value}`;
     }
     setLoading(!loading);
     try {
-      const res = await axios.post(`${serviceURL}/fii/index/`, temp);
+      const res = await axios.post(`${serviceURL}/${url}/`, temp);
       setLoading(!loading);
       setOpen(!open);
     } catch (error) {
@@ -78,6 +73,13 @@ export default function FormDialog(props) {
       setOpen(!open);
     }
   }
+
+  const canBeSubmitted = () => {
+    const newArray = Object.values(data);
+    return newArray.every(item =>  item.value !== '');
+  }
+
+  const isEnabled = canBeSubmitted();
 
   return (
     <div>
@@ -87,7 +89,7 @@ export default function FormDialog(props) {
           <DialogTitle id="form-dialog-title">Create new record</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Please enter data for FII INDEX
+              Please enter data for {clientCode}
           </DialogContentText>
 
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -137,26 +139,14 @@ export default function FormDialog(props) {
 
             <br />
             <br />
-
-            {netBuy && (<TextField
-              error={netBuy.error}
-              label="Net Buy"
-              value={netBuy.value ? netBuy.value : ''}
-              helperText={netBuy.error ? "Incorrect Number" : ""}
-              onChange={(e) => handleChange(e, netBuy)}
-              margin="dense"
-              name="netBuy"
-              fullWidth
-              variant="outlined"
-            />)}
-
+            
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
               Cancel
           </Button>
 
-            <Button onClick={handleSubmit} color="primary">
+            <Button onClick={handleSubmit} color="primary" disabled={!isEnabled}>
               {loading && <CircularProgress size={25} />}
             Submit
           </Button>
