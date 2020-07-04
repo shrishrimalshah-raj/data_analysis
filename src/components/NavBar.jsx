@@ -99,14 +99,21 @@ export default function NavBar() {
           </Box>
 
 
-          <Box mr="50px" flexGrow={1}>
+          <Box mr="50px">
             <Typography className={classes.title} variant="h6" noWrap>
               <Link to="/CLIENT" className={classes.link}>
                 CLIENT
               </Link>
             </Typography>
           </Box>
-
+          
+          <Box mr="50px" flexGrow={1}>
+            <Typography className={classes.title} variant="h6" noWrap>
+              <Link to="/STOCK" className={classes.link}>
+                STOCK
+              </Link>
+            </Typography>
+          </Box>
 
 
           <div className={classes.search}>
