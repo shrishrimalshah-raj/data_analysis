@@ -95,7 +95,7 @@ const Stock = () => {
 
        {/* STOCK CHART */}
       <NiftyChart
-        name="STOCK CHART LAST 22 DAYS" 
+        name={stockData.length > 0 ? `${stockData[0].symbol} STOCK CHART LAST 22 DAYS`: ''} 
         data={stockData} 
       />
 
@@ -104,14 +104,6 @@ const Stock = () => {
         name="Deliverable Quantity and Total Traded Quantity"
         data={stockData} 
         filterColumn={["date", "deliverableQuantity", "totalTradedQuantity",]} 
-        // extraColumn={["dailyLongPercentage", "dailyShortPercentage"]}  
-      />
-
-      {/* STOCK CHART */}
-      <MixedChartOI
-        name="Average Price (VWAP)"
-        data={stockData} 
-        filterColumn={["date", "averagePrice",]} 
         // extraColumn={["dailyLongPercentage", "dailyShortPercentage"]}  
       />
 

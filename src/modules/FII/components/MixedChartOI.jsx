@@ -1,7 +1,9 @@
 import React from 'react'
 import Chart from 'react-google-charts'
 import moment from 'moment'
+import { Box } from '@material-ui/core';
 
+import { ChipComponent } from '../../../components/Chip'
 
 const formatDate = (date, dailyLongPercentage, dailyShortPercentage) => {
   const dateFormat = moment(date).subtract(1, 'days').format('MMM Do YYYY');
@@ -10,7 +12,7 @@ const formatDate = (date, dailyLongPercentage, dailyShortPercentage) => {
 
 const changeMixedChartData = (data) => {
 
-  if(data.length === 0 ) {
+  if (data.length === 0) {
     return data;
   }
 
@@ -20,37 +22,40 @@ const changeMixedChartData = (data) => {
 
   data.forEach((res) => {
     let temp = [
-      formatDate(res[filterColumn[0]], res["dailyLongPercentage"], res["dailyShortPercentage"]), 
-      res[filterColumn[1]], 
+      formatDate(res[filterColumn[0]], res["dailyLongPercentage"], res["dailyShortPercentage"]),
+      res[filterColumn[1]],
       res[filterColumn[2]]
     ];
 
     newArray.push(temp)
   })
-  
+
   return newArray;
 }
 
-const MixedChartOI = ({ data }) => {
+const MixedChartOI = ({ name, data }) => {
   return (
     <div>
-      <Chart
-        width={'100%'}
-        height={'400px'}
-        chartType="LineChart"
-        loader={<div>Loading Chart</div>}
-        data={changeMixedChartData(data)}
-        options={{
-          hAxis: {
-            title: 'Mixed Chart OI',
-          },
-          series: {
-            1: { curveType: 'function' },
-          },
-          colors: ['#0f9d58', '#a52714']
-        }}
-        rootProps={{ 'data-testid': '2' }}
-      />
+      <Box mt="50px">
+        <ChipComponent name={name} />
+        <Chart
+          width={'100%'}
+          height={'400px'}
+          chartType="LineChart"
+          loader={<div>Loading Chart</div>}
+          data={changeMixedChartData(data)}
+          options={{
+            hAxis: {
+              title: 'Mixed Chart OI',
+            },
+            series: {
+              1: { curveType: 'function' },
+            },
+            colors: ['#0f9d58', '#a52714']
+          }}
+          rootProps={{ 'data-testid': '2' }}
+        />
+      </Box>
     </div>
   )
 }

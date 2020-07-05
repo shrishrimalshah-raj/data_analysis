@@ -71,11 +71,21 @@ const FIIIndexBar = () => {
           clientCode="FII FUTURE DATA OI"
         />)}
 
-      <DailyChartOI data={fiiData} title="FII FUTURE DATA OI CHANGE 2020" />
+      <DailyChartOI
+        name="Daily Long and Short Position"
+        data={fiiData}
+        title="FII FUTURE DATA OI CHANGE 2020"
+      />
 
-      <NiftyChart data={niftyData} />
+      <NiftyChart
+        name="NIFTY CHART"
+        data={niftyData}
+      />
 
-      <MixedChartOI data={fiiData} />
+      <MixedChartOI 
+        name="Long and Short Position"
+        data={fiiData} 
+      />
 
     </>
   )
