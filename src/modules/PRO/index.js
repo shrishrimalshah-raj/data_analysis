@@ -1,1 +1,1 @@
-export { default as PROIndexBarChart } from './PROIndexBarChart';
+export { default as PROTabs } from './PROTabs';

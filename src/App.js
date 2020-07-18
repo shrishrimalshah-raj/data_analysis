@@ -7,8 +7,8 @@ import {
 } from 'react-router-dom';
 
 import { FIITabs } from './modules/FII';
-import { PROIndexBarChart } from './modules/PRO';
-import { CLIENTIndexBarChart } from './modules/CLIENT';
+import { CLIENTTabs } from './modules/CLIENT';
+import { PROTabs } from './modules/PRO';
 import { Stock } from './modules/STOCK';
 
 import NavBar from './components/NavBar';
@@ -20,15 +20,12 @@ const App = () => {
       <BrowserRouter>
         <NavBar />  
         <Switch>
-
           <Route exact path="/FII" component={FIITabs} />
-          <Route exact path="/PRO" component={PROIndexBarChart} />
-          <Route exact path="/CLIENT" component={CLIENTIndexBarChart} />
+          <Route exact path="/PRO" component={PROTabs} />
+          <Route exact path="/CLIENT" component={CLIENTTabs} />
           <Route exact path="/STOCK" component={Stock} />
-
-
-          <Redirect to="/" />
-
+          
+          <Redirect to="/FII" />
         </Switch>
       </BrowserRouter>
     </>

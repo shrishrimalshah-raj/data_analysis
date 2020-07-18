@@ -1,1 +1,1 @@
-export { default as CLIENTIndexBarChart } from './CLIENTIndexBarChart';
+export { default as CLIENTTabs } from './CLIENTTabs';
